@@ -1,49 +1,42 @@
 package com.lab2;
 
-import java.util.Iterator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class SystemFacade {
     private List<Motherboard> motherboards;
     private List<CPU> cpus;
     private List<GPU> gpus;
-    public SystemFacade() {
-        // Конструктор по умолчанию
-    }
 
+    @Autowired
     public SystemFacade(List<Motherboard> motherboards, List<CPU> cpus, List<GPU> gpus) {
         this.motherboards = motherboards;
         this.cpus = cpus;
         this.gpus = gpus;
     }
 
-
-    public void displayComponents(){
-        ComponentVisitor visitor = new ComponentVisitor();
-
+    public void displayComponentInfo(ComponentVisitor visitor) {
+        if (visitor == null) {
+            throw new IllegalArgumentException("ComponentVisitor cannot be null");
+        }
         System.out.println("Процессоры:");
-        Iterator<CPU> cpuIterator = cpus.iterator();
-        while (cpuIterator.hasNext()) {
-            CPU cpu = cpuIterator.next();
+        for (CPU cpu : cpus) {
             cpu.accept(visitor);
         }
 
         System.out.println("Видеокарты:");
-        Iterator<GPU> gpuIterator = gpus.iterator();
-        while (gpuIterator.hasNext()) {
-            GPU gpu = gpuIterator.next();
+        for (GPU gpu : gpus) {
             gpu.accept(visitor);
         }
 
         System.out.println("Материнские платы:");
-        Iterator<Motherboard> motherboardIterator = motherboards.iterator();
-        while (motherboardIterator.hasNext()) {
-            Motherboard motherboard = motherboardIterator.next();
-            motherboard.accept(visitor);
+        for (Motherboard mb : motherboards) {
+            mb.accept(visitor);
         }
     }
-
-
 
     public void buildAndOutputSystems(ComponentVisitor visitor) {
         if (visitor == null) {
@@ -62,5 +55,16 @@ public class SystemFacade {
                 pcsystem.accept(visitor);
             }
         }
+    }
+    public void addCPU(CPU cpu) {
+        cpus.add(cpu);
+    }
+
+    public void addGPU(GPU gpu) {
+        gpus.add(gpu);
+    }
+
+    public void addMotherboard(Motherboard motherboard) {
+        motherboards.add(motherboard);
     }
 }

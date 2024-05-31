@@ -117,7 +117,7 @@ public class Menu {
 
 
         CPU cpu = Factory.createCPU(manufacturer, name, amountCores, socket, clock);
-        cpus.add(cpu);
+        systemFacade.addCPU(cpu);
         System.out.println("Процессор успешно добавлен.");
     }
 
@@ -143,7 +143,7 @@ public class Menu {
 
 
         GPU gpu = Factory.createGPU(manufacturer, name, port, clock);
-        gpus.add(gpu);
+        systemFacade.addGPU(gpu);
         System.out.println("Видеокарта успешно добавлена.");
     }
 
@@ -163,12 +163,13 @@ public class Menu {
         String socket = scanner.nextLine().trim();
 
         Motherboard mb = Factory.createMotherboard(manufacturer, name, port, socket);
-        motherboards.add(mb);
-        System.out.println("Видеокарта успешно добавлена.");
+        systemFacade.addMotherboard(mb);
+        System.out.println("Материнская карта успешно добавлена.");
     }
 
     private void displayComponentInfo() {
-        systemFacade.displayComponents();
+        ComponentVisitor visitor = new ComponentVisitor();
+        systemFacade.displayComponentInfo(visitor);
 
     }
     private void buildSystems() {
