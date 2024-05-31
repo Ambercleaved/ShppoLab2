@@ -1,17 +1,14 @@
 package com.lab2;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
+
 public class SystemFacade {
     private List<Motherboard> motherboards;
     private List<CPU> cpus;
     private List<GPU> gpus;
 
-    @Autowired
+
     public SystemFacade(List<Motherboard> motherboards, List<CPU> cpus, List<GPU> gpus) {
         this.motherboards = motherboards;
         this.cpus = cpus;
