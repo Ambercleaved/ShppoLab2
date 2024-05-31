@@ -2,10 +2,9 @@ package com.lab2;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+import org.springframework.context.annotation.*;
+
 @EnableAspectJAutoProxy
 @Configuration
 @ComponentScan("logger")
@@ -77,16 +76,19 @@ public class AppConfig {
         return motherboards;
     }
     @Bean
+    @Scope("prototype")
     public ComponentVisitor componentVisitor() {
         return new ComponentVisitor();
     }
 
     @Bean
+    @Scope("singleton")
     public SystemFacade systemFacade(List<Motherboard> motherboards, List<CPU> cpus, List<GPU> gpus) {
         return new SystemFacade(motherboards, cpus, gpus);
     }
 
     @Bean
+    @Scope("singleton")
     public Menu menu(SystemFacade systemFacade, List<Motherboard> motherboards, List<CPU> cpus, List<GPU> gpus) {
         return new Menu(systemFacade, motherboards, cpus, gpus);
     }
