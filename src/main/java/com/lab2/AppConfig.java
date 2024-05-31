@@ -1,7 +1,7 @@
 package com.lab2;
 
 import java.util.List;
-import java.util.ArrayList;
+
 
 import org.springframework.context.annotation.*;
 
@@ -12,13 +12,13 @@ import org.springframework.context.annotation.*;
 public class AppConfig {
 
     @Bean
-    @Scope("prototype")
+    @Scope("singleton")
     public ComponentVisitor componentVisitor() {
         return new ComponentVisitor();
     }
 
     @Bean
-    @Scope("prototype")
+    @Scope("singleton")
     public SystemFacade systemFacade(List<Motherboard> motherboards, List<CPU> cpus, List<GPU> gpus) {
         return new SystemFacade(motherboards, cpus, gpus);
     }
