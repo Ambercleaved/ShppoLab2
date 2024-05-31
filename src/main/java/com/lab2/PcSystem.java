@@ -1,32 +1,52 @@
 package com.lab2;
 
-public class PcSystem {
-    private Motherboard motherboard;
-    private CPU cpu;
-    private GPU gpu;
+import java.util.ArrayList;
+import java.util.List;
 
-    public PcSystem(Motherboard motherboard, CPU cpu, GPU gpu) {
-        this.motherboard = motherboard;
-        this.cpu = cpu;
-        this.gpu = gpu;
+public class PcSystem implements PComponent {
+    private List<PComponent> components;
+
+    public PcSystem() {
+        this.components = new ArrayList<>();
     }
 
-    public Motherboard getMotherboard() {
-        return motherboard;
+    public void addComponent(PComponent component) {
+        components.add(component);
     }
 
-    public CPU getCPU() {
-        return cpu;
+    public void removeComponent(PComponent component) {
+        components.remove(component);
     }
 
-    public GPU getGPU() {
-        return gpu;
+    public List<PComponent> getComponents() {
+        return components;
     }
-    public void accept(IVisitor visitor) {
-        System.out.println();
-        visitor.visit(cpu);
-        visitor.visit(gpu);
-        visitor.visit(motherboard);
-        System.out.println();
+
+    @Override
+    public int getId() {
+        return 0; // Composite doesn't have a single ID
+    }
+
+    @Override
+    public String getType() {
+        return "PcSystem";
+    }
+
+    @Override
+    public String getManufacturer() {
+        return "Various";
+    }
+
+    @Override
+    public String getName() {
+        return "PcSystem";
+    }
+
+    @Override
+    public void accept(ComponentVisitor visitor) {
+        System.out.println("");
+        for (PComponent component : components) {
+            component.accept(visitor);
+        }
     }
 }
