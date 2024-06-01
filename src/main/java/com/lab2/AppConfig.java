@@ -13,11 +13,6 @@ import org.springframework.context.annotation.*;
 public class AppConfig {
 
 
-    @Bean
-    @Scope("singleton")
-    public ComponentVisitor componentVisitor() {
-        return new ComponentVisitor();
-    }
 
     @Bean
     @Scope("singleton")
