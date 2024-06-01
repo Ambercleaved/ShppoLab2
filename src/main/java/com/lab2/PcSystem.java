@@ -44,9 +44,6 @@ public class PcSystem implements PComponent {
 
     @Override
     public void accept(ComponentVisitor visitor) {
-        System.out.println("");
-        for (PComponent component : components) {
-            component.accept(visitor);
-        }
+        visitor.visit(this);
     }
 }

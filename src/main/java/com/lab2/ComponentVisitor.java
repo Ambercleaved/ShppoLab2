@@ -22,5 +22,11 @@ public class ComponentVisitor implements IVisitor {
                 " , manufacturer: " + mb.getManufacturer() + " , name: " + mb.getName()
                 + " , Port: " + mb.getPort() + " , Socket: " + mb.getSocket());
     }
-
+    @Override
+    public void visit(PcSystem pcSystem) {
+        System.out.println("Visiting PcSystem:");
+        for (PComponent component : pcSystem.getComponents()) {
+            component.accept(this);
+        }
+    }
 }
