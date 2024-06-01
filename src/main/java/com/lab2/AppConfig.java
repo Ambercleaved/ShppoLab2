@@ -1,5 +1,6 @@
 package com.lab2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.*;
 @ComponentScan("com.lab2")
 @ComponentScan("logger")
 public class AppConfig {
+
 
     @Bean
     @Scope("singleton")
